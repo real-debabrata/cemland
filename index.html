@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Campus Events | Plan together. Run events smoothly.</title>
 <meta name="description" content="Campus Events is an event-management app for campus teams: registrations, QR tickets and check-in, tasks, payments and budgets in one place. Get the Android app or open the web app.">
-<meta name="theme-color" content="#F6F7FB">
+<meta name="theme-color" content="#F0F0FA">
 <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="icon" href="assets/icons/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -23,7 +23,10 @@
 <link rel="preload" href="assets/fonts/bricolage-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/figtree-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
-<script>document.documentElement.classList.add('js')</script>
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');
+try{var force=/[?&]intro/.test(location.search);if(!force&&(matchMedia('(prefers-reduced-motion: reduce)').matches||sessionStorage.getItem('cem-intro')==='1'||/[?&]nointro/.test(location.search)))d.classList.add('no-intro');}catch(e){}})();
+</script>
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Campus Events","applicationCategory":"BusinessApplication","operatingSystem":"Android, Web","description":"Event management for campus teams: registrations, QR tickets and check-in, tasks, payments and budgets.","downloadUrl":"https://downloadcem.deba.indevs.in/","url":"https://cem.deba.indevs.in/"}
@@ -32,43 +35,53 @@
 <body id="top">
 <a class="skip" href="#main">Skip to content</a>
 
+<!-- Intro: loader bar that folds into the logo mark, then opens onto the page -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__bar" id="ldBar"><i id="ldFill"></i></div>
+  <div class="loader__mark" id="ldMark"><i></i><i></i><i></i><i></i></div>
+  <div class="loader__count" id="ldCount">000</div>
+  <svg class="loader__veil" id="ldVeil" aria-hidden="true" focusable="false">
+    <defs>
+      <mask id="ldMask" maskUnits="userSpaceOnUse">
+        <rect id="ldMaskBg" fill="#fff"/>
+        <g id="ldHole" fill="#000"></g>
+      </mask>
+    </defs>
+    <rect id="ldBlack" fill="#000" mask="url(#ldMask)"/>
+    <g id="ldFillE" fill="#F0F0FA"></g>
+  </svg>
+</div>
+
 <header class="bar" id="bar">
   <a class="brand" href="#top" aria-label="Campus Events, back to top">
-    <img src="assets/icons/logo.svg" width="36" height="36" alt="">
+    <img src="assets/icons/logo.svg" width="28" height="28" alt="">
     <span>Campus Events</span>
   </a>
-  <div class="bar__actions">
-    <a class="pill pill--line hide-sm" href="https://cem.deba.indevs.in/">Open web app</a>
-    <button class="pill pill--solid" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  <div class="bar__right">
+    <span class="mask-pill hide-md"><a class="pill pill--grey roll-host" href="https://cem.deba.indevs.in/"><span class="roll"><span>Web app</span><span aria-hidden="true">Web app</span></span></a></span>
+    <span class="mask-pill hide-md"><a class="pill pill--dark roll-host" href="https://downloadcem.deba.indevs.in/"><span class="roll"><span>Get the app</span><span aria-hidden="true">Get the app</span></span><i class="dot" aria-hidden="true"></i></a></span>
+    <span class="mask-pill"><button class="pill pill--grey pill--menu roll-host" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu"><span class="roll menu-label"><span>Menu</span><span aria-hidden="true">Close</span></span><span class="dots" aria-hidden="true"><i></i><i></i></span></button></span>
   </div>
 </header>
 
-<!-- Full-screen menu -->
+<!-- Menu: stack of cards on a coloured backdrop -->
 <div class="menu" id="menu" aria-hidden="true">
-  <nav class="menu__main" aria-label="Main">
-    <a href="#top" data-close>Home</a>
-    <a href="#features" data-close>What it does</a>
-    <a href="#how" data-close>How it works</a>
-    <a href="#get" data-close>Get the app</a>
-  </nav>
-  <div class="menu__side">
-    <div>
-      <p class="menu__label">Use it</p>
-      <a href="https://downloadcem.deba.indevs.in/">Download for Android</a>
-      <a href="https://cem.deba.indevs.in/">Open web app</a>
-      <a href="https://cem.deba.indevs.in/login.html">Sign in</a>
-      <a href="https://cem.deba.indevs.in/tutorials/">Tutorials</a>
-    </div>
-    <div>
-      <p class="menu__label">Legal</p>
+  <div class="menu__bg"></div>
+  <div class="menu__cards">
+    <nav class="mcard mcard--links" aria-label="Main">
+      <a href="#top" data-close><span class="roll"><span>Home</span><span aria-hidden="true">Home</span></span></a>
+      <a href="#features" data-close><span class="roll"><span>What it does</span><span aria-hidden="true">What it does</span></span></a>
+      <a href="#how" data-close><span class="roll"><span>How it works</span><span aria-hidden="true">How it works</span></span></a>
+      <a href="https://cem.deba.indevs.in/tutorials/"><span class="roll"><span>Tutorials</span><span aria-hidden="true">Tutorials</span></span></a>
+    </nav>
+    <a class="mcard mcard--cta" href="https://downloadcem.deba.indevs.in/"><span>Download for Android</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19h14"/></svg></a>
+    <a class="mcard mcard--dark" href="https://cem.deba.indevs.in/"><span>Open web app</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    <p class="menu__legal">
       <a href="https://cem.deba.indevs.in/privacy.html">Privacy Policy</a>
       <a href="https://cem.deba.indevs.in/terms.html">Terms &amp; Conditions</a>
-    </div>
-    <div>
-      <p class="menu__label">Contact</p>
-      <a href="mailto:cem@deba.indevs.in">cem@deba.indevs.in</a>
+      <a href="mailto:cem@deba.indevs.in">Contact</a>
       <a href="https://github.com/real-debabrata/cem" rel="noopener">GitHub</a>
-    </div>
+    </p>
   </div>
 </div>
 
@@ -76,20 +89,22 @@
 
   <!-- Hero -->
   <section class="hero" aria-labelledby="h1">
-    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
-    <div class="hero__body">
-      <h1 id="h1"><span class="mask"><span class="line">Run campus events without the chaos.</span></span></h1>
-      <p class="hero__lead">Registrations, QR tickets, check-in, tasks and money for your whole team, in one app. Plan together and run the day smoothly.</p>
-      <div class="cta-row">
-        <a class="btn btn--primary" href="https://downloadcem.deba.indevs.in/">
-          <span>Download for Android</span><i class="btn__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19h14"/></svg></i>
-        </a>
-        <a class="btn btn--ghost" href="https://cem.deba.indevs.in/">
-          <span>Open web app</span><i class="btn__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
-        </a>
+    <h1 class="hero__title" id="h1" data-words>Sign-ups, QR tickets, check-in and payments in one app for campus event teams.</h1>
+
+    <div class="hero__visual" id="heroVisual">
+      <canvas id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <div class="hero__cta rise">
+        <a class="pill pill--light roll-host" href="https://downloadcem.deba.indevs.in/"><span class="roll"><span>Download for Android</span><span aria-hidden="true">Download for Android</span></span><i class="dot" aria-hidden="true"></i></a>
+        <a class="pill pill--glass roll-host" href="https://cem.deba.indevs.in/"><span class="roll"><span>Open web app</span><span aria-hidden="true">Open web app</span></span><i class="dot" aria-hidden="true"></i></a>
       </div>
     </div>
-    <a class="scroll-cue" href="#intro" aria-label="Scroll to explore"><span>scroll to explore</span><i aria-hidden="true"></i></a>
+
+    <a class="hero__scroll" href="#intro" aria-label="Scroll to explore">
+      <i class="cross" aria-hidden="true"></i><i class="cross cross--mid" aria-hidden="true"></i>
+      <span class="hero__scroll-text" data-words>Scroll to explore</span>
+      <i class="cross cross--mid" aria-hidden="true"></i><i class="cross" aria-hidden="true"></i>
+    </a>
   </section>
 
   <!-- Marquee -->

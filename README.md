@@ -9,7 +9,8 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies, no network reque
 index.html          the page (all copy and links are here)
 404.html            shown by GitHub Pages for unknown URLs
 css/style.css       styles (colours are variables at the top)
-js/main.js          menu, scroll-lit statement, hero balls
+js/main.js          opening sequence, menu, scroll-lit statement, hero balls
+reanimate/          motion spec and before/after evidence sheets (not published)
 assets/             logo, favicons, fonts (copied from the app repo)
 .nojekyll           tells GitHub Pages to serve files as they are
 .github/workflows/  deploy-pages.yml and reanimate-capture.yml (both manual)
@@ -38,6 +39,14 @@ Use `viewport` = `390x844` for the phone view, and `selector` / `trigger` to aim
 
 Add a file named `CNAME` containing only your domain, e.g. `campusevents.example.com`, then point a DNS `CNAME` record at `<your-username>.github.io`.
 Do **not** reuse `cem.deba.indevs.in`: your app repo already owns that address.
+
+## The opening sequence
+
+A short intro plays on the first visit: a bar fills, folds into the Campus Events mark and opens onto the page, then the
+header buttons, headline and scroll cue slide in (about 4.8 seconds in total, timings measured from the reference).
+It is skipped on repeat visits in the same browser session, when the visitor prefers reduced motion, and when they click
+the screen or press Esc. To replay it, add `?intro` to the address; to skip it, add `?nointro`.
+To remove it entirely, delete the `<div class="loader">` block in `index.html`.
 
 ## Where the links go
 
