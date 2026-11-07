@@ -1,0 +1,43 @@
+name: Deploy site (manual)
+
+# Runs only when you press the button: Actions tab > "Deploy site (manual)" > Run workflow.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      # Publish only the website files, not the workflows, README or any capture output.
+      - name: Assemble the site
+        run: |
+          set -euo pipefail
+          mkdir _site
+          cp index.html 404.html robots.txt _site/
+          cp -R css js assets _site/
+          [ -f CNAME ] && cp CNAME _site/ || true
+          touch _site/.nojekyll
+          echo "Files going live:" && find _site -type f | sort
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

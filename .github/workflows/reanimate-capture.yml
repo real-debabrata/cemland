@@ -1,0 +1,127 @@
+name: Reanimate capture (manual)
+
+# Records a reference site (default: lusion.co) with the reanimate skill and, optionally, this landing page
+# the same way. Results come back as a downloadable artifact (video, track.json, inspect.json, filmstrip sheets,
+# and a WebGL trace). Runs only when you press the button.
+# Skill: https://github.com/real-debabrata/reanimate
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Reference page to record
+        default: https://lusion.co
+      name:
+        description: Short name for this run (letters, digits and dashes)
+        default: lusion-home
+      viewport:
+        description: Viewport WxH (use 390x844 for the phone view)
+        default: 1440x900
+      selector:
+        description: CSS selector to crop to on the reference (empty = whole viewport)
+        default: ''
+      trigger:
+        description: How the motion starts
+        type: choice
+        default: load
+        options: [load, scroll, none, hover, click, move]
+      target:
+        description: Element to hover, click or move over (for those triggers)
+        default: ''
+      duration_ms:
+        description: Milliseconds to record after the trigger
+        default: '6000'
+      webgl:
+        description: Trace canvas and WebGL (virtual clock + GPU trace)
+        type: boolean
+        default: true
+      capture_clone:
+        description: Also record this landing page the same way
+        type: boolean
+        default: true
+      clone_selector:
+        description: CSS selector to crop to on this landing page
+        default: .hero
+      include_frames:
+        description: Include every PNG frame in the download (large)
+        type: boolean
+        default: false
+      extra_args:
+        description: Extra capture.ts flags, e.g. --scroll-to 1800 --fps 25
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SK: ${{ github.workspace }}/_reanimate/skills/reanimate/scripts
+      RUN_NAME: ${{ inputs.name }}
+      REF_URL: ${{ inputs.url }}
+      VIEWPORT: ${{ inputs.viewport }}
+      SELECTOR: ${{ inputs.selector }}
+      CLONE_SELECTOR: ${{ inputs.clone_selector }}
+      TRIGGER: ${{ inputs.trigger }}
+      TARGET: ${{ inputs.target }}
+      DURATION: ${{ inputs.duration_ms }}
+      WEBGL: ${{ inputs.webgl }}
+      EXTRA: ${{ inputs.extra_args }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get the reanimate skill
+        uses: actions/checkout@v4
+        with:
+          repository: real-debabrata/reanimate
+          ref: main
+          path: _reanimate
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install the skill's tools (Playwright Chromium, ffmpeg)
+        working-directory: _reanimate/skills/reanimate/scripts
+        run: |
+          set -euo pipefail
+          bun install --silent
+          bunx playwright install --with-deps chromium
+          bash setup.sh
+
+      - name: Record the reference
+        run: |
+          set -euo pipefail
+          OUT=".reanimate/${RUN_NAME}/ref"
+          args=(--url "$REF_URL" --out "$OUT" --viewport "$VIEWPORT" --trigger "$TRIGGER" --duration "$DURATION")
+          [ -n "$SELECTOR" ] && args+=(--selector "$SELECTOR" --track "$SELECTOR")
+          [ -n "$TARGET" ] && args+=(--target "$TARGET")
+          if [ "$WEBGL" = "true" ]; then args+=(--clock virtual --gl); fi
+          read -ra more <<< "$EXTRA" || true
+          bun "$SK/capture.ts" "${args[@]}" "${more[@]}"
+          bun "$SK/sheet.ts" filmstrip --frames "$OUT/frames" --out "$OUT/sheets" --every 2 || true
+          if [ -f "$OUT/gl/summary.md" ]; then
+            { echo "## WebGL summary: reference"; cat "$OUT/gl/summary.md"; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Record this landing page the same way
+        if: ${{ inputs.capture_clone }}
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8080 >/dev/null 2>&1 &
+          sleep 2
+          OUT=".reanimate/${RUN_NAME}/clone"
+          args=(--url "http://localhost:8080/index.html" --out "$OUT" --viewport "$VIEWPORT" --trigger "$TRIGGER" --duration "$DURATION" --selector "$CLONE_SELECTOR" --track "$CLONE_SELECTOR")
+          if [ "$WEBGL" = "true" ]; then args+=(--clock virtual --gl); fi
+          read -ra more <<< "$EXTRA" || true
+          bun "$SK/capture.ts" "${args[@]}" "${more[@]}"
+          bun "$SK/sheet.ts" filmstrip --frames "$OUT/frames" --out "$OUT/sheets" --every 2 || true
+
+      - name: Trim the download
+        if: ${{ !inputs.include_frames }}
+        run: find ".reanimate/${RUN_NAME}" -type d -name frames -prune -exec rm -rf {} +
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reanimate-${{ inputs.name }}
+          path: .reanimate/${{ inputs.name }}
+          retention-days: 14
