@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Campus Events | Plan together. Run events smoothly.</title>
+<meta name="description" content="Campus Events is an event-management app for campus teams: registrations, QR tickets and check-in, tasks, payments and budgets in one place. Get the Android app or open the web app.">
+<meta name="theme-color" content="#F6F7FB">
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="assets/icons/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Campus Events">
+<meta property="og:title" content="Campus Events | Plan together. Run events smoothly.">
+<meta property="og:description" content="Registrations, QR tickets and check-in, tasks, payments and budgets for campus event teams.">
+<!-- Social previews need an absolute URL. Change this to your landing page's own address once you know it. -->
+<meta property="og:image" content="https://cem.deba.indevs.in/icons/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" href="assets/fonts/bricolage-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/figtree-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js')</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Campus Events","applicationCategory":"BusinessApplication","operatingSystem":"Android, Web","description":"Event management for campus teams: registrations, QR tickets and check-in, tasks, payments and budgets.","downloadUrl":"https://downloadcem.deba.indevs.in/","url":"https://cem.deba.indevs.in/"}
+</script>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar" id="bar">
+  <a class="brand" href="#top" aria-label="Campus Events, back to top">
+    <img src="assets/icons/logo.svg" width="36" height="36" alt="">
+    <span>Campus Events</span>
+  </a>
+  <div class="bar__actions">
+    <a class="pill pill--line hide-sm" href="https://cem.deba.indevs.in/">Open web app</a>
+    <button class="pill pill--solid" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+
+<!-- Full-screen menu -->
+<div class="menu" id="menu" aria-hidden="true">
+  <nav class="menu__main" aria-label="Main">
+    <a href="#top" data-close>Home</a>
+    <a href="#features" data-close>What it does</a>
+    <a href="#how" data-close>How it works</a>
+    <a href="#get" data-close>Get the app</a>
+  </nav>
+  <div class="menu__side">
+    <div>
+      <p class="menu__label">Use it</p>
+      <a href="https://downloadcem.deba.indevs.in/">Download for Android</a>
+      <a href="https://cem.deba.indevs.in/">Open web app</a>
+      <a href="https://cem.deba.indevs.in/login.html">Sign in</a>
+      <a href="https://cem.deba.indevs.in/tutorials/">Tutorials</a>
+    </div>
+    <div>
+      <p class="menu__label">Legal</p>
+      <a href="https://cem.deba.indevs.in/privacy.html">Privacy Policy</a>
+      <a href="https://cem.deba.indevs.in/terms.html">Terms &amp; Conditions</a>
+    </div>
+    <div>
+      <p class="menu__label">Contact</p>
+      <a href="mailto:cem@deba.indevs.in">cem@deba.indevs.in</a>
+      <a href="https://github.com/real-debabrata/cem" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="h1">
+    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero__body">
+      <h1 id="h1"><span class="mask"><span class="line">Run campus events without the chaos.</span></span></h1>
+      <p class="hero__lead">Registrations, QR tickets, check-in, tasks and money for your whole team, in one app. Plan together and run the day smoothly.</p>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="https://downloadcem.deba.indevs.in/">
+          <span>Download for Android</span><i class="btn__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19h14"/></svg></i>
+        </a>
+        <a class="btn btn--ghost" href="https://cem.deba.indevs.in/">
+          <span>Open web app</span><i class="btn__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
+        </a>
+      </div>
+    </div>
+    <a class="scroll-cue" href="#intro" aria-label="Scroll to explore"><span>scroll to explore</span><i aria-hidden="true"></i></a>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Registration</span><b></b><span>QR tickets</span><b></b><span>Check-in</span><b></b><span>Tasks</span><b></b><span>Payments</span><b></b><span>Budgets</span><b></b><span>Event chat</span><b></b>
+      <span>Registration</span><b></b><span>QR tickets</span><b></b><span>Check-in</span><b></b><span>Tasks</span><b></b><span>Payments</span><b></b><span>Budgets</span><b></b><span>Event chat</span><b></b>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <section class="intro" id="intro">
+    <p class="intro__big">Campus Events is a simple event-management app for campus teams. Sign-ups, tickets, tasks and payments live in one place, so nobody is chasing spreadsheets the night before.</p>
+    <a class="textlink" href="#features">See what it does</a>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features" aria-labelledby="fh">
+    <div class="features__head">
+      <h2 id="fh">What it does</h2>
+      <p>Everything a campus event needs, from the first sign-up to the final bill.</p>
+    </div>
+    <ul class="flist">
+      <li class="frow">
+        <h3>Registration</h3>
+        <div>
+          <p>An online sign-up page you can share as a link or a QR code, with a waitlist and approvals.</p>
+          <p class="tags">sign-up page, waitlist, approvals</p>
+        </div>
+      </li>
+      <li class="frow">
+        <h3>Tickets and check-in</h3>
+        <div>
+          <p>Every attendee gets a QR ticket. Scan it at the gate; check-in keeps working offline once the event is open.</p>
+          <p class="tags">QR tickets, gate scanning, offline</p>
+        </div>
+      </li>
+      <li class="frow">
+        <h3>Email</h3>
+        <div>
+          <p>Send each attendee their ticket or an invitation straight from the app.</p>
+          <p class="tags">tickets, invitations</p>
+        </div>
+      </li>
+      <li class="frow">
+        <h3>Tasks and team</h3>
+        <div>
+          <p>Task groups, a shopping list, roles and permissions, and a chat for each event.</p>
+          <p class="tags">tasks, roles, chat</p>
+        </div>
+      </li>
+      <li class="frow">
+        <h3>Money</h3>
+        <div>
+          <p>Track cash and UPI payments, income, bills, vendors and your budget.</p>
+          <p class="tags">payments, UPI, budget, vendors</p>
+        </div>
+      </li>
+      <li class="frow">
+        <h3>Export and import</h3>
+        <div>
+          <p>Export to CSV or ZIP, and import your attendee list from a spreadsheet.</p>
+          <p class="tags">CSV, ZIP, spreadsheets</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Scroll-scrubbed statement -->
+  <section class="scrub" aria-label="In short">
+    <div class="scrub__in">
+      <p class="scrub__text" data-scrub>Set it up once, share the code, and your whole team runs the same event from the same place.</p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how" id="how" aria-labelledby="hh">
+    <h2 id="hh">How it works</h2>
+    <ol class="steps">
+      <li>
+        <span class="steps__n" aria-hidden="true">1</span>
+        <h3>Sign in</h3>
+        <p>Use your Google account or an email address.</p>
+      </li>
+      <li>
+        <span class="steps__n" aria-hidden="true">2</span>
+        <h3>Create your event</h3>
+        <p>Tap <strong>New event</strong>, fill in the details and publish.</p>
+      </li>
+      <li>
+        <span class="steps__n" aria-hidden="true">3</span>
+        <h3>Bring in your team</h3>
+        <p>Share the 6-letter event code from <strong>Details</strong> so others can join.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Call to action -->
+  <section class="get" id="get" aria-labelledby="gh">
+    <h2 id="gh">Your next event starts here.</h2>
+    <p class="get__lead">Get the Android app, or run it in your browser. Same account, same events.</p>
+    <div class="cta-row">
+      <a class="btn btn--amber" href="https://downloadcem.deba.indevs.in/">
+        <span>Download for Android</span><i class="btn__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19h14"/></svg></i>
+      </a>
+      <a class="btn btn--outline" href="https://cem.deba.indevs.in/">
+        <span>Open web app</span><i class="btn__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></i>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot__cols">
+    <div>
+      <p class="foot__label">Use it</p>
+      <a href="https://downloadcem.deba.indevs.in/">Download for Android</a>
+      <a href="https://cem.deba.indevs.in/">Open web app</a>
+      <a href="https://cem.deba.indevs.in/login.html">Sign in</a>
+      <a href="https://cem.deba.indevs.in/tutorials/">Tutorials</a>
+    </div>
+    <div>
+      <p class="foot__label">Legal</p>
+      <a href="https://cem.deba.indevs.in/privacy.html">Privacy Policy</a>
+      <a href="https://cem.deba.indevs.in/terms.html">Terms &amp; Conditions</a>
+    </div>
+    <div>
+      <p class="foot__label">Contact</p>
+      <a href="mailto:cem@deba.indevs.in">cem@deba.indevs.in</a>
+      <a href="https://github.com/real-debabrata/cem" rel="noopener">GitHub</a>
+    </div>
+  </div>
+  <div class="foot__base">
+    <a class="brand brand--foot" href="#top" aria-label="Back to top">
+      <img src="assets/icons/logo.svg" width="32" height="32" alt="">
+      <span>Campus Events</span>
+    </a>
+    <p>&copy; <span id="yr">2026</span> Campus Events. Plan together. Run events smoothly.</p>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
