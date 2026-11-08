@@ -4,6 +4,7 @@
    header buttons rise 3.76, headline words 3.92, scroll cue and calls to action ~4.05. */
 (function () {
   'use strict';
+  window.__cemReady = true;   /* tells the failsafe timer in index.html that this script is running */
 
   var root = document.documentElement;
   var body = document.body;
