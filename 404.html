@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+/* A 404 page is served at whatever URL was mistyped (e.g. /cemland/a/b), so relative links like assets/... and ./ would break.
+   Fix the base: on a GitHub Pages project site it is /cemland/, anywhere else (custom domain, user site) it is /. Rename 'cemland' here if you rename the repo. */
+(function(){var gh=/\.github\.io$/.test(location.hostname)&&/^\/cemland(\/|$)/.test(location.pathname);document.write('<base href="'+(gh?'/cemland/':'/')+'">');})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Page not found | Campus Events</title>
 <meta name="robots" content="noindex">

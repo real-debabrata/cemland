@@ -14,18 +14,21 @@
 <meta property="og:site_name" content="Campus Events">
 <meta property="og:title" content="Campus Events | Plan together. Run events smoothly.">
 <meta property="og:description" content="Registrations, QR tickets and check-in, tasks, payments and budgets for campus event teams.">
-<!-- Social previews need an absolute URL. Change this to your landing page's own address once you know it. -->
-<meta property="og:image" content="https://cem.deba.indevs.in/icons/og-image.png">
+<!-- Social previews need an absolute URL. If you move to a custom domain, change both lines below to that domain. -->
+<meta property="og:image" content="https://real-debabrata.github.io/cemland/assets/icons/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://real-debabrata.github.io/cemland/assets/icons/og-image.png">
 
 <link rel="preload" href="assets/fonts/bricolage-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/figtree-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <script>
 (function(){var d=document.documentElement;d.classList.add('js');
-try{var force=/[?&]intro/.test(location.search);if(!force&&(matchMedia('(prefers-reduced-motion: reduce)').matches||sessionStorage.getItem('cem-intro')==='1'||/[?&]nointro/.test(location.search)))d.classList.add('no-intro');}catch(e){}})();
+try{var force=/[?&]intro/.test(location.search);if(!force&&(matchMedia('(prefers-reduced-motion: reduce)').matches||sessionStorage.getItem('cem-intro')==='1'||/[?&]nointro/.test(location.search)))d.classList.add('no-intro');}catch(e){}
+/* Failsafe: if js/main.js has not started within 6 seconds (blocked, slow or broken), drop the intro so the page is never stuck on black. */
+setTimeout(function(){if(!window.__cemReady)d.classList.add('no-intro');},6000);})();
 </script>
 
 <script type="application/ld+json">
